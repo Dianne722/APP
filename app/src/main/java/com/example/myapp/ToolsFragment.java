@@ -30,7 +30,7 @@ public class ToolsFragment extends Fragment {
             xuesheng.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), Activity5.class);
+                    Intent intent = new Intent(getActivity(), StudentManager.class);
                     intent.setAction(Intent.ACTION_VIEW);
                     startActivity(intent);
                 }
