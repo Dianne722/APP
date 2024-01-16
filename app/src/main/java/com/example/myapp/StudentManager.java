@@ -51,7 +51,6 @@ public class StudentManager extends AppCompatActivity {
 
         new ListStudentGetTask().execute("http://192.168.31.169:8080/students/list");
 
-
     }
 
     @Override
