@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/primary"
+            android:gravity="center"
+            android:text="学生信息管理"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/transule"
+            android:hint="姓名"
+            android:textColor="@color/primary_text"
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/age"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/transule"
+            android:hint="年龄"
+            android:textColor="@color/primary_text"
+            android:textSize="20dp" />
+
+
+        <RadioGroup
+            android:layout_margin="15dp"
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:textSize="25dp"
+                android:layout_weight="1"
+                android:id="@+id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="男" />
+
+            <RadioButton
+                android:textSize="25dp"
+                android:layout_weight="1"
+                android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="女" />
+
+        </RadioGroup>
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="@color/black"
+                android:text="专业："
+                android:textSize="25dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <!-- 在布局文件中定义 Spinner -->
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:id="@+id/major"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:entries="@array/major_options" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/college"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/transule"
+            android:hint="学院"
+            android:textColor="@color/primary_text"
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/enrollmentDate"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/transule"
+            android:hint="入学时间"
+            android:textColor="@color/primary_text"
+            android:textSize="20dp" />
+        <TextView
+            android:textColor="@color/black"
+            android:text="选修课程："
+            android:textSize="25dp"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- 在布局文件中定义 CheckBox -->
+        <CheckBox
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/computerNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="计算机网络"
+            android:textSize="25sp" />
+
+        <CheckBox
+            android:id="@+id/javaProgramming"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Java程序设计"
+            android:textSize="25sp" />
+
+        <CheckBox
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/embeddedSystems"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="嵌入式基础"
+            android:textSize="25sp" />
+        <Button
+            android:id="@+id/submit"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/yuanjiao_button"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

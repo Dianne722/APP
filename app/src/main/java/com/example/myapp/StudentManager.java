@@ -1,8 +1,10 @@
 package com.example.myapp;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +34,9 @@ public class StudentManager extends AppCompatActivity {
     private StudentAdapter adapter;
     private ArrayList<Student> studentList = new ArrayList<>();
 
+    static int ADDCODE = 100;
+    static int EDITCODE = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +54,7 @@ public class StudentManager extends AppCompatActivity {
 
         findAllViewsById();
 
-        new ListStudentGetTask().execute("http://192.168.31.169:8080/students/list");
-
+        showStudentList();
     }
 
     @Override
@@ -86,5 +90,19 @@ public class StudentManager extends AppCompatActivity {
                 showStudentInfo(students);
             }
         }
+    }
+
+    private void showStudentList() {
+        new ListStudentGetTask().execute(WebApiUrl.STUDENT_LIST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+
+        showStudentList();
     }
 }

@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -29,8 +31,11 @@ public class StudentAdapter extends BaseAdapter implements View.OnClickListener 
         final int position = (int) view.getTag();
         final Student student = (Student) studentDatas.get(position);
         if (view.getId() == R.id.edit) {
-
-
+            Intent intent = new Intent();
+            intent.setClass(studentContext, StudentInfoActivity.class);
+            intent.putExtra("student", student);
+            intent.putExtra("operationType", StuInfoOper.Edit);
+            Toast.makeText(studentContext, student.getName() + ":编辑" + position,Toast.LENGTH_LONG).show();
 
         } else if (view.getId() == R.id.delete) {
             AlertDialog.Builder myDialog = new AlertDialog.Builder(studentContext);
@@ -106,7 +111,7 @@ public class StudentAdapter extends BaseAdapter implements View.OnClickListener 
 
     @SuppressLint("DefaultLocale")
     private void delete(final Student student, final int position){
-        new DeleteStudentGetTask().execute(String.format("http://192.168.31.169:8080/students/delete/%d", student.getId()), Integer.toString(position));
+        new DeleteStudentGetTask().execute(WebApiUrl.makeDeleteStudentUrl(student.getId()), Integer.toString(position));
     }
 
     private class DeleteStudentGetTask extends AsyncTask<String, Void, Integer> {
