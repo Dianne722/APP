@@ -36,6 +36,7 @@ public class StudentAdapter extends BaseAdapter implements View.OnClickListener 
             intent.putExtra("student", student);
             intent.putExtra("operationType", StuInfoOper.Edit);
             Toast.makeText(studentContext, student.getName() + ":编辑" + position,Toast.LENGTH_LONG).show();
+            studentContext.startActivity(intent);
 
         } else if (view.getId() == R.id.delete) {
             AlertDialog.Builder myDialog = new AlertDialog.Builder(studentContext);

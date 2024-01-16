@@ -10,4 +10,8 @@ public class WebApiUrl {
     public static String makeDeleteStudentUrl(long id) {
         return BASE_DELETE_STUDENT + id;
     }
+
+    public static String makeListCoursesUrl(long id) {
+        return BASE_URL + "/student/" + id + "/list-courses";
+    }
 }
