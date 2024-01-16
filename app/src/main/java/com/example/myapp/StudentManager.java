@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,8 +27,10 @@ public class StudentManager extends AppCompatActivity {
 
     private ListView studentListView;
 
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> studentList = new ArrayList<>();
+    private EditText findStuInfoEdit;
+
+    private StudentAdapter adapter;
+    private ArrayList<Student> studentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +47,11 @@ public class StudentManager extends AppCompatActivity {
             return;
         }
 
-        studentListView = findViewById(R.id.studentList);
+        findAllViewsById();
 
         new ListStudentGetTask().execute("http://192.168.31.169:8080/students/list");
+
+
     }
 
     @Override
@@ -55,20 +60,13 @@ public class StudentManager extends AppCompatActivity {
         isVisible = false;
     }
 
-    private void showStudentInfo(List<Student> students) {
-        for (Student student : students) {
-            studentList.add(student.getName());
-        }
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentList);
-
-        studentListView.setAdapter(adapter);
+    private void findAllViewsById() {
+        studentListView = findViewById(R.id.studentList);
+        findStuInfoEdit = findViewById(R.id.findStuInfo);
     }
 
-    private void showTest() {
-        studentList.add("123");
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentList);
+    private void showStudentInfo(List<Student> students) {
+        adapter = new StudentAdapter(this, students);
 
         studentListView.setAdapter(adapter);
     }
@@ -77,23 +75,7 @@ public class StudentManager extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            String urlStr = urls[0];
-            try {
-                URL url = new URL(urlStr);
-                HttpURLConnection connect = (HttpURLConnection) url.openConnection();
-                InputStream input = connect.getInputStream();
-                BufferedReader in = new BufferedReader(new InputStreamReader(input));
-                String line = null;
-                Log.i("StudentManager", Integer.toString(connect.getResponseCode()));
-                StringBuilder sb = new StringBuilder();
-                while ((line = in.readLine()) != null) {
-                    sb.append(line);
-                }
-                return sb.toString();
-            } catch (Exception e) {
-                Log.i("StudentManager", e.toString());
-                return null;
-            }
+            return HttpConnect.getHttpResult(urls[0]);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
