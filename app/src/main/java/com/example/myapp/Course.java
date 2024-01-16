@@ -6,6 +6,8 @@ public class Course implements Serializable {
     private Long courseId;
     private String courseName;
 
+    public Course() {}
+
     public Course(Long courseId, String courseName) {
         this.courseId = courseId;
         this.courseName = courseName;

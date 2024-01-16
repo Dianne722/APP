@@ -8,6 +8,8 @@ public class Grade implements Serializable {
     private Student student;
     private int score;
 
+    public Grade() {}
+
     public Grade(Long gradeId, Course course, Student student, int score) {
         this.gradeId = gradeId;
         this.course = course;
