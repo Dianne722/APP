@@ -50,7 +50,7 @@ public class Activity5 extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent();
-                    intent.setClass(view.getContext(), Activity4.class);
+                    //intent.setClass(view.getContext(), Activity4.class);
                     startActivity(intent);
                 }
             });

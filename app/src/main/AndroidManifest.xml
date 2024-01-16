@@ -31,48 +31,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Myapp"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity4"
-            android:exported="false"
-            android:label="@string/title_activity_4"
-            android:theme="@style/Theme.Myapp">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activity5"
-            android:exported="false"
-            android:label="@string/title_activity_5"
-            android:theme="@style/Theme.Myapp" />
-        <activity
-            android:name=".ui.theme.ui.theme.MainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Myapp" />
-        <activity
-            android:name=".ui.theme.Activity4"
-            android:exported="false" />
-        <activity
-            android:name=".ui.theme.TeachActivity"
-            android:exported="false"
-            android:label="@string/title_activity_teach"
-            android:theme="@style/Theme.Myapp" />
-        <activity
-            android:name=".ui.theme.ActivityTeach"
-            android:exported="false" />
-        <activity
-            android:name=".Activity_Teach"
-            android:exported="false"
-            android:label="@string/title_activity_teach"
-            android:theme="@style/Theme.Myapp" />
-        <activity
-            android:name=".TeachActivity"
-            android:exported="false"
-            android:label="@string/title_activity_teach"
-            android:theme="@style/Theme.Myapp" />
 
         <meta-data
             android:name="com.google.android.actions"
