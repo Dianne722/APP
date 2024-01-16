@@ -1,12 +1,24 @@
 package com.example.myapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentManager extends AppCompatActivity {
 
@@ -15,13 +27,14 @@ public class StudentManager extends AppCompatActivity {
     private ListView studentListView;
 
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> studentList;
+    private ArrayList<String> studentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_manager);
     }
+
 
     @Override
     protected void onResume() {
@@ -33,19 +46,64 @@ public class StudentManager extends AppCompatActivity {
 
         studentListView = findViewById(R.id.studentList);
 
-        studentList = new ArrayList<>();
-        studentList.add("Student 1");
-        studentList.add("Student 2");
-        studentList.add("Student 3");
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentList);
-
-        studentListView.setAdapter(adapter);
+        new ListStudentGetTask().execute("http://192.168.31.169:8080/students/list");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         isVisible = false;
+    }
+
+    private void showStudentInfo(List<Student> students) {
+        for (Student student : students) {
+            studentList.add(student.getName());
+        }
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentList);
+
+        studentListView.setAdapter(adapter);
+    }
+
+    private void showTest() {
+        studentList.add("123");
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentList);
+
+        studentListView.setAdapter(adapter);
+    }
+
+    private class ListStudentGetTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String urlStr = urls[0];
+            try {
+                URL url = new URL(urlStr);
+                HttpURLConnection connect = (HttpURLConnection) url.openConnection();
+                InputStream input = connect.getInputStream();
+                BufferedReader in = new BufferedReader(new InputStreamReader(input));
+                String line = null;
+                Log.i("StudentManager", Integer.toString(connect.getResponseCode()));
+                StringBuilder sb = new StringBuilder();
+                while ((line = in.readLine()) != null) {
+                    sb.append(line);
+                }
+                return sb.toString();
+            } catch (Exception e) {
+                Log.i("StudentManager", e.toString());
+                return null;
+            }
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        protected void onPostExecute(String result) {
+            List<Student> students = JsonUtils.toBean(result, new TypeReference<List<Student>>() {});
+
+            if (students != null) {
+                showStudentInfo(students);
+            }
+        }
     }
 }
